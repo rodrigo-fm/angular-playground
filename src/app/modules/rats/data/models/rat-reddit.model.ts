@@ -16,24 +16,18 @@ export default class RatRedditJsonModel implements Rat {
 
     static fromJsonList(json: any[]): RatRedditJsonModel[] {
         return json
-            .filter((child) => {
-                const metaData = child.data.media_metadata;
-                if(metaData === undefined) return false;
-                const metaDataKeys = Object.keys(metaData);
+            .filter((rat: any) => {
                 return (
-                    metaData[metaDataKeys[metaDataKeys.length - 1]].e === 'Image'
-                );
+                    !rat.data.is_video &&
+                    rat.data.url_overridden_by_dest !== undefined &&
+                    !rat.data.url_overridden_by_dest.includes('reddit.com/gallery')
+                );  
             })
-            .map((rat) => {
-                const mediaMetaDataKeys = Object.keys(rat.data.media_metadata);
+            .map((rat: any) => {
                 return new RatRedditJsonModel({
                     title: rat.data.title,
-                    imagesURLS: mediaMetaDataKeys.map((key: string) => {
-                        const metaDatas = rat.data.media_metadata;
-                        if(metaDatas[key].s !== undefined) return metaDatas[key].s.u;
-                        return metaDatas[key].p[metaDatas[key].p.length - 1].u;
-                    }),
+                    imagesURLS: [rat.data.url_overridden_by_dest]
+                });
             });
-        });
     }
 }
