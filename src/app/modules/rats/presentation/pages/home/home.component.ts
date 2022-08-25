@@ -11,15 +11,22 @@ import GetRatsUseCase from '../../../domain/usecases/implementations/get-rats.us
 })
 export class HomePage {
 
-  private rats?: Rat[];
+  rats: Rat[] = [];
 
   constructor(@Inject(GetRatsUseCase) private readonly getRatsUseCase: IGetRatsUseCase) {}
 
-  // getRats = async () => {
-  //   const rats: Rat[] | Error = await this.getRatsUseCase.handle();
-  //   if(rats instanceof Error) {}
-  //   else {
-  //     this.rats = rats;
-  //   }
-  // }
+  getRats = async () => {    
+    this.getRatsUseCase.handle().then((result) => {
+      if(!(result instanceof Error)) {
+        this.rats = result;
+      } else {
+        console.log(result.message);
+      }
+    })
+    // const rats: Rat[] | Error = await this.getRatsUseCase.handle();
+    // if(rats instanceof Error) {}
+    // else {
+    //   this.rats = rats;
+    // }
+  }
 }

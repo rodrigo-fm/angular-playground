@@ -4,7 +4,8 @@ import RatsRedditRepository from './data/repositories/implementations/rats-reddi
 import GetRatsUseCase from './domain/usecases/implementations/get-rats.usecase';
 import { HomePage } from './presentation/pages/home/home.component';
 
-const components: any[] = [HomePage];
+// const components: any[] = [HomePage];
+const components: any[] = [];
 
 @NgModule({
   declarations: components,
