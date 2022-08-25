@@ -1,9 +1,12 @@
-<div *ngFor="let rat of rats">
-    <h4>{{rat.title}}</h4>
-    <a *ngFor="let image of rat.imagesURLS" href="{{image}}" target="_blank">
-        <img src="{{ image }}" style="max-height: 350px"/>
-    </a>
+<div class="container">
+    <div *ngFor="let rat of rats" class="rat-list--item">
+        <h4>{{rat.title}}</h4>
+        <a *ngFor="let image of rat.imagesURLS" href="{{image}}" target="_blank">
+            <img src="{{ image }}" style="max-height: 350px"/>
+        </a>
+    </div>
+    <button (click)="getRats()" class="btn btn-primary">
+        Get rats!
+    </button>
 </div>
-<button (click)="getRats()">
-    Test file reading
-</button>
+

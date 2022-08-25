@@ -11,7 +11,7 @@ import GetRatsUseCase from '../../../domain/usecases/implementations/get-rats.us
 })
 export class HomePage {
 
-  rats: Rat[] = [];
+  public rats: Rat[] = [];
 
   constructor(@Inject(GetRatsUseCase) private readonly getRatsUseCase: IGetRatsUseCase) {}
 
