@@ -1,11 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
+import RatsRedditRepository from "../../../data/repositories/implementations/rats-reddit.repository";
 import IRatsRepository from "../../../data/repositories/rats-interface.repository";
 import Rat from "../../entities/rat.entity";
+import IGetRatsUseCase from "../get-rats-interface.usecase";
 
 @Injectable()
-export default class GetRatsUseCase {
+export default class GetRatsUseCase implements IGetRatsUseCase {
 
-    constructor(private readonly repository: IRatsRepository) {}
+    constructor(@Inject(RatsRedditRepository) private readonly repository: IRatsRepository) {}
 
     handle = async (): Promise<Rat[] | Error> => {
         try {

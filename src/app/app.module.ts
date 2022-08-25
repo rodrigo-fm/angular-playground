@@ -4,20 +4,23 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './modules/rats/presentation/pages/home/home.component';
-import GetRatsUseCase from './modules/rats/domain/usecases/implementations/get-rats.usecase';
+import { RatsModule } from './modules/rats/rats.module';
+import { RouterModule } from '@angular/router';
+import { routes } from './shared/main/routes';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent],
   imports: [
+    // Angular modules
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    RouterModule.forRoot(routes),
+
+    // Project Modules
+    RatsModule,
   ],
-  providers: [GetRatsUseCase],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
