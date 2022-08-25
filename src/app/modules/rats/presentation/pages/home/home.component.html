@@ -1,5 +1,5 @@
 <div *ngFor="let rat of rats">
-    <p>{{rat.title}}</p>
+    <h4>{{rat.title}}</h4>
     <a *ngFor="let image of rat.imagesURLS" href="{{image}}" target="_blank">
         <img src="{{ image }}" style="max-height: 350px"/>
     </a>
