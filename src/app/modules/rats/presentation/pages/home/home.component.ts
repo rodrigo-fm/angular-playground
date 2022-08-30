@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import Rat from '../../../domain/entities/rat.entity';
 import IGetRatsUseCase from '../../../domain/usecases/get-rats-interface.usecase';
 import GetRatsUseCase from '../../../domain/usecases/implementations/get-rats.usecase';
@@ -9,24 +9,17 @@ import GetRatsUseCase from '../../../domain/usecases/implementations/get-rats.us
   styleUrls: ['./home.component.scss'],
   providers: [GetRatsUseCase]
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   public rats: Rat[] = [];
 
   constructor(@Inject(GetRatsUseCase) private readonly getRatsUseCase: IGetRatsUseCase) {}
-
-  getRats = async () => {    
+  
+  async ngOnInit(): Promise<void> {
     this.getRatsUseCase.handle().then((result) => {
       if(!(result instanceof Error)) {
         this.rats = result;
-      } else {
-        console.log(result.message);
       }
     })
-    // const rats: Rat[] | Error = await this.getRatsUseCase.handle();
-    // if(rats instanceof Error) {}
-    // else {
-    //   this.rats = rats;
-    // }
   }
 }
